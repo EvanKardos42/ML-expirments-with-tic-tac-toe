@@ -1,38 +1,35 @@
-from tictactoe.GameBoard import Rules
+from tictactoe.GameBoard import Game_Board
 from tictactoe.AI import Robot
 
 
 def play_game(bob):
-    board_grid = [str(i) for i in range(1, 10)]
-    player1 = "X"
-    player2 = "O"
+    player1,player2 = "X", "O"
     turn_tracker = 0
     current_player = player1
     game_over = False
-    rule_book: Rules = Rules()
-    player_move = int(0)
+    game: Game_Board = Game_Board()
 
     while not game_over:
         if turn_tracker % 2 == 0:
             current_player = player1
-            player_move = bob.move(board_grid, turn_tracker)
+            player_move = bob.move(game.board, turn_tracker)
+            print("computer\'s move")
         else:
-            print(rule_book.get_printable_board(board_grid))
             # print("turn count {}".format(turn_tracker))
             current_player = player2
             player_move = int(input("input a number: ")) - 1
 
-        rule_book.play_move(player_move, current_player, board_grid)
+        game.play_move(player_move, current_player)
 
-        if rule_book.check_winner(board_grid):
+        if game.check_winner():
             game_over = True
-        elif rule_book.board_full(board_grid):
+        elif game.board_full():
             current_player = " "
             game_over = True
-
+        print(game.get_printable_board())
         turn_tracker += 1
 
-    print(rule_book.get_printable_board(board_grid))
+    print(game.get_printable_board())
     return current_player
 
 

@@ -1,18 +1,18 @@
 import unittest as test_frames
 from tictactoe.AI import Robot
-from tictactoe.GameBoard import Rules
+from tictactoe.GameBoard import Game_board
 
 
 class MyTest(test_frames.TestCase):
 
     def setUp(self):
-        self.rules = Rules()
+        self.rules = Game_board()
 
     def test_check_winner(self):
         board = ["X", "X", "X",
                  "O", "O", "6",
                  "O", "O", "X"]
-        r = Rules()
+        r = Game_board()
         # test the rows
         answer = r.check_winner(board)
         self.assertEqual(True, answer, "class did not find that X's should have won")

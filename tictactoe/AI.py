@@ -1,17 +1,17 @@
-from tictactoe.GameBoard import Rules
+from tictactoe.GameBoard import Game_Board
 
 
 class Robot:
     def __init__(self):
-        self.rules = Rules()
+        self.rules = Game_Board()
         self.symbol = "X"
         self.opponent = "O"
 
-    def move(self, board, turn):
+    def move(self, board: list, turn):
         if turn == 0:
             return 4
         else:
-            return self._recurse_find_move(board.copy(), self.symbol)
+            return self._recurse_find_move(board.copy() , self.symbol)
 
     def _recurse_find_move(self, current_state: list, current_player, move=0):
         """a simple recursion algorithm that will find the first best move
@@ -44,9 +44,9 @@ class Robot:
         ended = self.rules.check_winner(board_state)
         tied = self.rules.board_full(board_state)
         if ended and winner == self.symbol or tied:
-            return 1
+            return 10
         elif ended and winner == self.opponent:
-            return -1
+            return -10
         else:
             return 0
 
